@@ -1,11 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
 
+// ROUTE FILES
+const bootcamps = require("./routes/bootcamps");
+
 // LOAD ENV VARS
 
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
+
+// MOUNT ROUTERS
+app.use("/api/v1/bootcamps", bootcamps);
 
 const PORT = process.env.PORT || 5000;
 

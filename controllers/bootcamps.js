@@ -1,4 +1,5 @@
 const Bootcamp = require("../models/Bootcamp");
+const ErrorResponse = require("../utils/errorResponse");
 
 // @desc    GET ALL BOOTCAMPS
 // @route   GET /api/v1/bootcamps
@@ -10,8 +11,8 @@ exports.getBootcamps = async (req, res, next) => {
     res
       .status(200)
       .json({ success: true, count: bootcamps.length, data: bootcamps });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -25,11 +26,13 @@ exports.getBootcamp = async (req, res, next) => {
 
     {
       !bootcamp
-        ? res.status(400).json({ success: false })
+        ? new ErrorResponse(
+            `Bootcamp not found with id of ${req.params.id}`,
+            404
+          )
         : res.status(200).json({ success: true, data: bootcamp });
     }
   } catch (err) {
-    // res.status(400).json({ success: false });
     next(err);
   }
 };
@@ -42,8 +45,8 @@ exports.createBootcamp = async (req, res, next) => {
   try {
     const bootcamp = await Bootcamp.create(req.body);
     res.status(201).json({ success: true, data: bootcamp });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -59,11 +62,14 @@ exports.updateBootcamp = async (req, res, next) => {
     });
 
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return new ErrorResponse(
+        `Bootcamp not found with id of ${req.params.id}`,
+        404
+      );
     }
     res.status(200).json({ success: true, data: bootcamp });
-  } catch (error) {
-    res.status(400).json({ success: false });
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -75,8 +81,13 @@ exports.deleteBootcamp = async (req, res, next) => {
   try {
     const bootcamp = Bootcamp.findByIdAndDelete(req.params.id);
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return new ErrorResponse(
+        `Bootcamp not found with id of ${req.params.id}`,
+        404
+      );
     }
     res.status(200).json({ success: true, data: bootcamp });
-  } catch (error) {}
+  } catch (err) {
+    next(err);
+  }
 };

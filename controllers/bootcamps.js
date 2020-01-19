@@ -11,7 +11,6 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
   res
     .status(200)
     .json({ success: true, count: bootcamps.length, data: bootcamps });
-  next(err);
 });
 
 // @desc    GET SINGLE BOOTCAMPS
@@ -26,7 +25,6 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
       ? new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
       : res.status(200).json({ success: true, data: bootcamp });
   }
-  next(err);
 });
 
 // @desc    CREATE NEW BOOTCAMP
@@ -36,7 +34,6 @@ exports.getBootcamp = asyncHandler(async (req, res, next) => {
 exports.createBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.create(req.body);
   res.status(201).json({ success: true, data: bootcamp });
-  next(err);
 });
 
 // @desc    UPDATE BOOTCAMP
@@ -56,7 +53,6 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
     );
   }
   res.status(200).json({ success: true, data: bootcamp });
-  next(err);
 });
 
 // @desc    DELETE BOOTCAMP
@@ -72,5 +68,4 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
     );
   }
   res.status(200).json({ success: true, data: bootcamp });
-  next(err);
 });

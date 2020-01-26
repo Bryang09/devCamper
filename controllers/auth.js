@@ -18,7 +18,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     role
   });
 
-  getSignedJWTToken(user, 200, res);
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc    Login User
@@ -53,7 +53,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // GET TOKEN FROM MODEL, CREATE COOKIE AND SEND RESPONSE
 const sendTokenResponse = (user, statusCode, res) => {
   // CREATE TOKEN
-  const token = user.getSignedJWTToken();
+  const token = user.getSignedJwtToken();
 
   const options = {
     expires: new Date(

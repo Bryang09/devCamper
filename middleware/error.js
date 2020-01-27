@@ -6,7 +6,8 @@ const errorHandler = (err, req, res, next) => {
   error.message = err.message;
 
   // log to console for dev
-  console.log(err.stack.red.underline);
+  // console.log(err.stack.red.underline);
+  console.log(err.message.red.underline);
 
   //  MONGOOSE BAD OBJECT ID
 
@@ -30,7 +31,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   res
-    .status(err.statusCode || 500)
+    .status(error.statusCode || 500)
     .json({ success: false, error: error.message || "Service Error" });
 };
 

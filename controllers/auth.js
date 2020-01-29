@@ -3,6 +3,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const path = require("path");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 // @desc    Register User
 // @route   POST /api/v1/auth/register
@@ -110,6 +111,35 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     success: true,
     data: user
   });
+});
+
+// @desc    RESET PASSWORD
+// @route   POST /api/v1/auth/resetpassword/:resettoken
+// @access  PRIVATE
+
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  // GET HASHED TOKEN
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resettoken)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    return next(new ErrorResponse("Invalid Token", 400));
+  }
+
+  // SET NEW PASSWORD
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+  sendTokenResponse(user, 200, res);
 });
 
 // GET TOKEN FROM MODEL, CREATE COOKIE AND SEND RESPONSE

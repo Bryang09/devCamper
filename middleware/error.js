@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
 
   // log to console for dev
   // console.log(err.stack.red.underline);
-  console.log(err.message.red.underline);
+  console.log(err.stack.red.underline);
 
   //  MONGOOSE BAD OBJECT ID
 

@@ -2,6 +2,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 
 const Review = require("../models/Review");
+const Bootcamp = require("../models/Bootcamp");
 
 // @desc    Get Reviews
 // @route   GET /api/v1/reviews
@@ -39,4 +40,28 @@ exports.getReview = asyncHandler(async (req, res, next) => {
   }
 
   res.status(200).json({ success: true, data: review });
+});
+
+// @desc    Add Review
+// @route   POST /api/v1/:bootcampId/reviews
+// @access  Private
+
+exports.addReview = asyncHandler(async (req, res, next) => {
+  req.body.bootcamp = req.params.bootcampId;
+  req.body.user = req.user.id;
+
+  const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+
+  if (!bootcamp) {
+    return next(
+      new ErrorResponse(
+        `Bootcamp with id of ${req.params.bootcampId} not found`,
+        404
+      )
+    );
+  }
+
+  const review = await Review.create(req.body);
+
+  res.status(201).json({ success: true, data: review });
 });

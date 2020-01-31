@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const colors = require("colors");
+const sanitize = require("express-mongo-sanitize");
 const fileupload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -27,6 +28,7 @@ const app = express();
 // BODY PARSER
 app.use(express.json());
 
+// Cookie Parser
 app.use(cookieParser());
 
 // DEV LOGGING MIDDLEWARE
@@ -36,6 +38,8 @@ if (process.env.NODE_ENV === "development") {
 
 // FILE UPLOAD
 app.use(fileupload());
+
+app.use(sanitize());
 
 // SET STATIC FOLDER
 app.use(express.static(path.join(__dirname, "public")));

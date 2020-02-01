@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client-install": "npm install --prefix dist",
     "start": "NODE_ENV=production node server",
-    "server": "nodemon server"
+    "server": "nodemon server",
+    "dist": "npm start --prefix dist",
+    "dev": "concurrently \"npm run server\" \"npm run dist\""
   },
   "keywords": [],
   "author": "",
@@ -13,6 +16,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "concurrently": "^5.1.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

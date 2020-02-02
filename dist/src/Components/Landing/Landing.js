@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import LandingForm from "./Form/Form";
 import LandingBackground from "./Bg/Bg";
-import Error from "../ErrorMessage/Error";
+import Error from "../Alert/ErrorMessage/Error";
 
 import axios from "axios";
 
@@ -11,7 +11,6 @@ import { Redirect } from "react-router-dom";
 import "./Landing.scss";
 
 import { BASE_URL } from "../../keys";
-import Success from "../SuccessMessage/SuccessMessage";
 
 class Landing extends Component {
   state = {

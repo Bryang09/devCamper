@@ -1,0 +1,26 @@
+.Landing {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+
+  .landingForm {
+    width: 30vw;
+    height: 100vh;
+    background: #fff;
+  }
+
+  .landingBg {
+    width: 70vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#330981, #1098aa);
+    .bgContainer {
+      width: 70%;
+      height: 80%;
+      background: url(./bg.svg) no-repeat center center / contain;
+    }
+  }
+}

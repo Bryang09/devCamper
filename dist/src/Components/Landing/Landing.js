@@ -23,19 +23,20 @@ class Landing extends Component {
     success: false,
     formType: "login",
     role: "user",
-    fpSent: false //ForgottenPassword
+    fpSent: false, //ForgottenPassword
+    token: null
   };
-
-  componentDidMount = () => {};
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // Change form type, ie. login,signup
   onFormType = param => {
     this.setState({ formType: param });
   };
 
+  // Login User
   onSubmit = () => {
     const { email, password } = this.state;
     axios({
@@ -61,6 +62,7 @@ class Landing extends Component {
       });
   };
 
+  // Register new user
   onRegister = () => {
     const { email, password, name, role } = this.state;
 
@@ -86,17 +88,44 @@ class Landing extends Component {
         this.setState({ statusCode, errMessage: error });
       });
   };
-
+  // Get token to change forgotten password
   onForgotPassword = () => {
     const { email } = this.state;
     axios({
       method: "POST",
-      url: `http://localhost:5000/api/v1/auth/forgotpassword`,
+      url: `${BASE_URL}/api/v1/auth/forgotpassword`,
       data: { email },
       headers: { "Content-Type": "application/json" }
     })
       .then(res => {
-        this.setState({ fpSent: true });
+        this.setState({ fpSent: true, formType: "reset" });
+      })
+      .catch(err => {
+        const errorResponse = { err };
+
+        const statusCode = errorResponse.err.response.status;
+        const { error } = errorResponse.err.response.data;
+
+        this.setState({ statusCode, errMessage: error });
+      });
+  };
+
+  onNewPassword = () => {
+    const { token, password } = this.state;
+    axios({
+      method: "PUT",
+      url: `${BASE_URL}/api/v1/auth/resetpassword/${token}`,
+      data: { password },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        const { token } = res.data;
+
+        localStorage.setItem("token", token);
+
+        this.setState({ success: true });
       })
       .catch(err => {
         const errorResponse = { err };
@@ -129,9 +158,10 @@ class Landing extends Component {
       return <Redirect to={"/member/home"} />;
     }
 
+    console.log(formType);
+
     return (
       <div className="Landing">
-        <Success sent={fpSent} />
         <Error errMessage={errMessage} statusCode={statusCode} />
         <LandingForm
           email={email}
@@ -145,6 +175,8 @@ class Landing extends Component {
           owner={owner}
           onOwner={this.onOwner}
           onForgotPassword={this.onForgotPassword}
+          fpSent={fpSent}
+          onNewPassword={this.onNewPassword}
         />
         <LandingBackground />
       </div>

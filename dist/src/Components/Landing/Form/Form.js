@@ -3,12 +3,22 @@ import React from "react";
 import "./Form.scss";
 import "../../../App.scss";
 
-import Email from "./Email/Email";
-import Password from "./Password/Password";
+import LoginForm from "./Login/LoginForm";
+import RegisterForm from "./Register/RegisterForm";
 
 const LandingForm = props => {
-  console.log(props);
-  const { email, onChange, password, onSubmit } = props;
+  const {
+    email,
+    onChange,
+    password,
+    onSubmit,
+    name,
+    loginForm,
+    onFormType,
+    onRegister,
+    owner,
+    onOwner
+  } = props;
 
   return (
     <div className="landingForm">
@@ -20,17 +30,26 @@ const LandingForm = props => {
           </h1>
         </div>
         <div className="form">
-          <form>
-            <Email email={email} onChange={onChange} />
-            <Password password={password} onChange={onChange} />
-            <div className="loginBtn">
-              <h4 onClick={onSubmit}>Login</h4>
-            </div>
-            <div className="signUp">
-              <h5>Not Registered?</h5>
-              <h6>Sign Up</h6>
-            </div>
-          </form>
+          {loginForm ? (
+            <LoginForm
+              email={email}
+              onChange={onChange}
+              password={password}
+              onFormType={onFormType}
+              onSubmit={onSubmit}
+            />
+          ) : (
+            <RegisterForm
+              email={email}
+              onChange={onChange}
+              password={password}
+              onFormType={onFormType}
+              onRegister={onRegister}
+              name={name}
+              owner={owner}
+              onOwner={onOwner}
+            />
+          )}
         </div>
       </div>
     </div>

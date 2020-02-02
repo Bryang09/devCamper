@@ -11,9 +11,7 @@ const RegisterForm = props => {
     password,
     name,
     onRegister,
-
     onFormType,
-    owner,
     onOwner
   } = props;
 
@@ -32,7 +30,7 @@ const RegisterForm = props => {
       </div>
       <div className="signUp">
         <h5>Already Registered?</h5>
-        <h6 onClick={onFormType}>Log In</h6>
+        <h6 onClick={() => onFormType("login")}>Log In</h6>
       </div>
     </form>
   );

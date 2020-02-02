@@ -18,10 +18,12 @@
 
   .form {
     width: 80%;
+
     form {
       display: flex;
       flex-direction: column;
-
+      transition: 1s ease;
+      animation: form 1s ease;
       .checkbox {
         margin-bottom: 20px;
 
@@ -80,5 +82,22 @@
         text-decoration-color: $main_color;
       }
     }
+  }
+}
+span {
+  h6 {
+    text-align: center;
+    // color: $main_color;
+    text-decoration: underline;
+    // text-decoration-color: $main_color;
+  }
+}
+
+@keyframes form {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

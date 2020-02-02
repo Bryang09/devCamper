@@ -9,6 +9,7 @@ const Password = props => {
         type="password"
         name="password"
         placeholder="Please Type Your Password"
+        autoComplete="on"
         onChange={onChange}
       />
     </div>

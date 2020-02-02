@@ -10,12 +10,15 @@ const LoginForm = props => {
     <form>
       <Email email={email} onChange={onChange} />
       <Password password={password} onChange={onChange} />
-      <div className="loginBtn">
+      <span className="loginBtn">
         <h4 onClick={onSubmit}>Login</h4>
-      </div>
+      </span>{" "}
+      <span>
+        <h6 onClick={e => onFormType("forgotPassword")}>Forgot Password</h6>
+      </span>
       <div className="signUp">
         <h5>Not Registered?</h5>
-        <h6 onClick={onFormType}>Sign Up</h6>
+        <h6 onClick={() => onFormType("signup")}>Sign Up</h6>
       </div>
     </form>
   );

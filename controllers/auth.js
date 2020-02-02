@@ -118,6 +118,8 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
+  console.log(req.protocol);
+
   // CREATE RESET URL
   const resetUrl = `${req.protocol}://${req.get(
     "host"
@@ -143,11 +145,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 
     return next(new ErrorResponse("Email could not be sent"), 500);
   }
-
-  res.status(200).json({
-    success: true,
-    data: user
-  });
 });
 
 // @desc    RESET PASSWORD

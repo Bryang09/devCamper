@@ -5,6 +5,7 @@ import "../../../App.scss";
 
 import LoginForm from "./Login/LoginForm";
 import RegisterForm from "./Register/RegisterForm";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
 const LandingForm = props => {
   const {
@@ -13,11 +14,12 @@ const LandingForm = props => {
     password,
     onSubmit,
     name,
-    loginForm,
+    formType,
     onFormType,
     onRegister,
     owner,
-    onOwner
+    onOwner,
+    onForgotPassword
   } = props;
 
   return (
@@ -30,7 +32,7 @@ const LandingForm = props => {
           </h1>
         </div>
         <div className="form">
-          {loginForm ? (
+          {formType === "login" ? (
             <LoginForm
               email={email}
               onChange={onChange}
@@ -38,7 +40,7 @@ const LandingForm = props => {
               onFormType={onFormType}
               onSubmit={onSubmit}
             />
-          ) : (
+          ) : formType === "signup" ? (
             <RegisterForm
               email={email}
               onChange={onChange}
@@ -48,6 +50,13 @@ const LandingForm = props => {
               name={name}
               owner={owner}
               onOwner={onOwner}
+            />
+          ) : (
+            <ForgotPassword
+              email={email}
+              onChange={onChange}
+              onFormType={onFormType}
+              onForgotPassword={onForgotPassword}
             />
           )}
         </div>

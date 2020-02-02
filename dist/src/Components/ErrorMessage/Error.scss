@@ -1,0 +1,23 @@
+.Error {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 300px;
+  height: 150px;
+  background: salmon;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  animation: show 1s ease;
+}
+
+@keyframes show {
+  0% {
+    transform: translateY(-50vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

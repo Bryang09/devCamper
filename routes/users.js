@@ -6,7 +6,8 @@ const {
   getUser,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  userPhotoUpload
 } = require("../controllers/users");
 
 const User = require("../models/User");
@@ -27,5 +28,9 @@ router
   .get(getUser)
   .put(updateUser)
   .delete(deleteUser);
+
+router
+  .route("/:id/photo")
+  .put(protect, authorize("publisher", "admin"), userPhotoUpload);
 
 module.exports = router;

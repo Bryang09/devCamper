@@ -1,0 +1,26 @@
+@import "../../Uitilites/variables.scss";
+
+.memberLanding {
+  min-height: 100vh;
+  max-height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .sort {
+    width: 30vw;
+    height: 100vh;
+    background: $main-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .results {
+    width: 70vw;
+    min-height: 100vh;
+    max-height: 100%;
+  }
+}

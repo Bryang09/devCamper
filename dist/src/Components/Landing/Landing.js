@@ -27,6 +27,7 @@ class Landing extends Component {
   };
 
   onChange = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 

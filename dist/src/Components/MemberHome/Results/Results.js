@@ -19,6 +19,8 @@ const Results = props => {
       _id
     } = bootcamp;
 
+    const { formattedAddress } = bootcamp.location;
+
     return (
       <div className="singleBootcamp" key={_id}>
         <div className="singleBootcampContainer">
@@ -37,6 +39,7 @@ const Results = props => {
               <h4>{averageRating}</h4>
             </span>
 
+            <h5>{formattedAddress}</h5>
             <h5>{website}</h5>
             <h5>{phone}</h5>
 

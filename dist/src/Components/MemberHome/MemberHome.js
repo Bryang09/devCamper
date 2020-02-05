@@ -14,7 +14,9 @@ export class MemberHome extends Component {
     _id: null,
     name: null,
     email: null,
-    bootcamps: []
+    bootcamps: [],
+    zip: null,
+    distance: null
   };
 
   componentDidMount = () => {
@@ -46,13 +48,26 @@ export class MemberHome extends Component {
       .catch(err => console.log({ err }));
   };
 
+  onSort = e => {
+    e.preventDefault();
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
-    const { photo, _id, name, email, bootcamps } = this.state;
+    const { photo, _id, name, email, bootcamps, zip, distance } = this.state;
     console.log(bootcamps);
     return (
       <div className="memberLanding">
         <div className="sort">
-          <Sorting photo={photo} _id={_id} name={name} email={email} />
+          <Sorting
+            photo={photo}
+            _id={_id}
+            name={name}
+            email={email}
+            zip={zip}
+            distance={distance}
+            onSort={this.onSort}
+          />
         </div>
         <div className="results">
           <Results bootcamps={bootcamps} />

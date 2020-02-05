@@ -53,6 +53,19 @@ export class MemberHome extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onSubmitSort = () => {
+    const { zip, distance } = this.state;
+
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/bootcamps/radius/${zip}/${distance}`
+    })
+      .then(res => {
+        this.setState({ bootcamps: res.data.data }, console.log(res));
+      })
+      .catch(err => console.log({ err }));
+  };
+
   render() {
     const { photo, _id, name, email, bootcamps, zip, distance } = this.state;
     console.log(bootcamps);
@@ -67,6 +80,7 @@ export class MemberHome extends Component {
             zip={zip}
             distance={distance}
             onSort={this.onSort}
+            onSubmitSort={this.onSubmitSort}
           />
         </div>
         <div className="results">

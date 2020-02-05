@@ -8,12 +8,17 @@ import Sort from "./Sort/Sort";
 
 const Sorting = props => {
   console.log(props);
-  const { photo, name, zip, distance, onSort } = props;
+  const { photo, name, zip, distance, onSort, onSubmitSort } = props;
 
   return (
     <div className="sortContainer">
       <HeadContainer photo={photo} name={name} />
-      <Sort zip={zip} distance={distance} onSort={onSort} />
+      <Sort
+        zip={zip}
+        distance={distance}
+        onSort={onSort}
+        onSubmitSort={onSubmitSort}
+      />
     </div>
   );
 };

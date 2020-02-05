@@ -3,7 +3,7 @@ import React from "react";
 import "./Form.scss";
 
 const Form = props => {
-  const { zip, distance, onSort } = props;
+  const { zip, distance, onSort, onSubmitSort } = props;
 
   console.log(zip, distance);
 
@@ -26,7 +26,9 @@ const Form = props => {
         ""
       )}
       {distance !== null && distance.length > 0 ? (
-        <h4 className="submitSort">Submit</h4>
+        <h4 className="submitSort" onClick={onSubmitSort}>
+          Submit
+        </h4>
       ) : null}
       {/* <input type="number" name="distance" placeholder="Max Distance" /> */}
     </form>

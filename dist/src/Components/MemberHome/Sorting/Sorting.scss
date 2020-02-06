@@ -37,6 +37,20 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    flex-direction: column;
     // align-items: center;
+
+    .logout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h5 {
+      color: #fff;
+      font-weight: 400;
+      text-decoration: underline;
+      text-align: center;
+      cursor: pointer;
+    }
   }
 }

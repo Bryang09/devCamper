@@ -17,7 +17,8 @@ const Sorting = props => {
     onSubmitDistance,
     maxPrice,
     onSubmitPrice,
-    onDistanceAndPrice
+    onDistanceAndPrice,
+    onLogout = { onLogout }
   } = props;
 
   return (
@@ -31,6 +32,7 @@ const Sorting = props => {
         onSubmitPrice={onSubmitPrice}
         maxPrice={maxPrice}
         onDistanceAndPrice={onDistanceAndPrice}
+        onLogout={onLogout}
       />
     </div>
   );

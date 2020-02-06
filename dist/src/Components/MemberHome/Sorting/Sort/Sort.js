@@ -9,7 +9,8 @@ const Sort = props => {
     onSubmitDistance,
     onSubmitPrice,
     maxPrice,
-    onDistanceAndPrice
+    onDistanceAndPrice,
+    onLogout
   } = props;
 
   return (
@@ -23,6 +24,9 @@ const Sort = props => {
         maxPrice={maxPrice}
         onDistanceAndPrice={onDistanceAndPrice}
       />
+      <div className="logout">
+        <h5 onClick={onLogout}>Logout</h5>
+      </div>
     </div>
   );
 };

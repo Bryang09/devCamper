@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 import { BASE_URL } from "../../keys";
 
-import "./MemberHome.scss";
 import Sorting from "./Sorting/Sorting";
 import Results from "./Results/Results";
+
+import "./MemberHome.scss";
 
 export class MemberHome extends Component {
   state = {
@@ -17,10 +19,14 @@ export class MemberHome extends Component {
     bootcamps: [],
     zip: null,
     distance: null,
-    maxPrice: null
+    maxPrice: null,
+    logoutSuccess: false
   };
 
   componentDidMount = () => {
+    if (localStorage.getItem("token") === null) {
+      this.setState({ logoutSuccess: true });
+    }
     let token = localStorage.getItem("token");
 
     axios({
@@ -101,6 +107,17 @@ export class MemberHome extends Component {
       .catch(err => console.log({ err }));
   };
 
+  onLogout = () => {
+    const { logoutSuccess } = this.state;
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/auth/logout`
+    }).then(res => {
+      localStorage.removeItem("token");
+      this.setState({ logoutSuccess: true });
+    });
+  };
+
   render() {
     const {
       photo,
@@ -110,9 +127,13 @@ export class MemberHome extends Component {
       bootcamps,
       zip,
       distance,
-      maxPrice
+      maxPrice,
+      logoutSuccess
     } = this.state;
     console.log(bootcamps);
+    if (logoutSuccess) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="memberLanding">
         <div className="sort">
@@ -129,6 +150,7 @@ export class MemberHome extends Component {
             onSubmitDistance={this.onSubmitDistance}
             onSubmitPrice={this.onSubmitPrice}
             onDistanceAndPrice={this.onDistanceAndPrice}
+            onLogout={this.onLogout}
           />
         </div>
         <div className="results">

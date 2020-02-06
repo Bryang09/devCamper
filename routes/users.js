@@ -29,8 +29,6 @@ router
   .put(updateUser)
   .delete(deleteUser);
 
-router
-  .route("/:id/photo")
-  .put(protect, authorize("publisher", "admin"), userPhotoUpload);
+router.route("/:id/photo").put(protect, userPhotoUpload);
 
 module.exports = router;

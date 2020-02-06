@@ -2,7 +2,15 @@ import React from "react";
 import Form from "./Form/Form";
 
 const Sort = props => {
-  const { zip, distance, onSort, onSubmitSort } = props;
+  const {
+    zip,
+    distance,
+    onSort,
+    onSubmitDistance,
+    onSubmitPrice,
+    maxPrice,
+    onDistanceAndPrice
+  } = props;
 
   return (
     <div className="sortFieldContainer">
@@ -10,7 +18,10 @@ const Sort = props => {
         zip={zip}
         distance={distance}
         onSort={onSort}
-        onSubmitSort={onSubmitSort}
+        onSubmitDistance={onSubmitDistance}
+        onSubmitPrice={onSubmitPrice}
+        maxPrice={maxPrice}
+        onDistanceAndPrice={onDistanceAndPrice}
       />
     </div>
   );

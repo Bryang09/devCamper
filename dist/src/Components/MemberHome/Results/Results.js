@@ -39,6 +39,9 @@ const Results = props => {
               <h4>{averageRating}</h4>
             </span>
 
+            <h5 className="averageCost">
+              Average Cost: <span>${averageCost}</span>
+            </h5>
             <h5>{formattedAddress}</h5>
             <h5>{website}</h5>
             <h5>{phone}</h5>
@@ -56,7 +59,9 @@ const Results = props => {
       <div className="header">
         <h2>Bootcamps</h2>
       </div>
-      <div className="content">{singleBootcamp}</div>
+      <div className="content">
+        {bootcamps.length > 0 ? singleBootcamp : <h1>No Bootcamp</h1>}
+      </div>
       <div className="pagination"></div>
     </div>
   );

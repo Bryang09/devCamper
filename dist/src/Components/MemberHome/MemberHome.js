@@ -16,7 +16,8 @@ export class MemberHome extends Component {
     email: null,
     bootcamps: [],
     zip: null,
-    distance: null
+    distance: null,
+    maxPrice: null
   };
 
   componentDidMount = () => {
@@ -53,7 +54,7 @@ export class MemberHome extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmitSort = () => {
+  onSubmitDistance = () => {
     const { zip, distance } = this.state;
 
     axios({
@@ -66,8 +67,51 @@ export class MemberHome extends Component {
       .catch(err => console.log({ err }));
   };
 
+  onSubmitPrice = () => {
+    const { maxPrice } = this.state;
+
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/bootcamps?averageCost[lte]=${maxPrice}`
+    })
+      .then(res => {
+        this.setState({ bootcamps: res.data.data }, console.log(res));
+      })
+      .catch(err => console.log({ err }));
+  };
+
+  onDistanceAndPrice = () => {
+    const { zip, distance, maxPrice } = this.state;
+
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/bootcamps/radius/${zip}/${distance}`
+    })
+      .then(res => {
+        let newBootcamps = res.data.data;
+        const filtered = newBootcamps.filter(
+          res => res.averageCost <= maxPrice
+        );
+        this.setState(
+          { bootcamps: filtered },
+          console.log(this.state.bootcamps)
+        );
+        // this.setState({ bootcamps: res.data.data });
+      })
+      .catch(err => console.log({ err }));
+  };
+
   render() {
-    const { photo, _id, name, email, bootcamps, zip, distance } = this.state;
+    const {
+      photo,
+      _id,
+      name,
+      email,
+      bootcamps,
+      zip,
+      distance,
+      maxPrice
+    } = this.state;
     console.log(bootcamps);
     return (
       <div className="memberLanding">
@@ -77,10 +121,14 @@ export class MemberHome extends Component {
             _id={_id}
             name={name}
             email={email}
+            maxPrice={maxPrice}
             zip={zip}
             distance={distance}
             onSort={this.onSort}
-            onSubmitSort={this.onSubmitSort}
+            onSubmitDistance={this.onSubmitDistance}
+            onSubmitDistance={this.onSubmitDistance}
+            onSubmitPrice={this.onSubmitPrice}
+            onDistanceAndPrice={this.onDistanceAndPrice}
           />
         </div>
         <div className="results">

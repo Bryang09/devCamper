@@ -89,6 +89,13 @@
           font-weight: 400;
           margin: 5px 0;
           text-decoration: underline;
+
+          span {
+            color: $main-color;
+          }
+        }
+        h5.averageCost {
+          text-decoration: none;
         }
 
         p {

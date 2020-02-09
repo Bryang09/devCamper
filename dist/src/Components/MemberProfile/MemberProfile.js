@@ -5,9 +5,14 @@ import axios from "axios";
 
 import { BASE_URL } from "../../keys";
 
+import "./MemberProfile.scss";
+
+import Form from "./Form/Form";
+
 export class MemberProfile extends Component {
   state = {
-    tokenSuccess: null
+    tokenSuccess: null,
+    user: false
   };
 
   componentDidMount = () => {
@@ -26,19 +31,26 @@ export class MemberProfile extends Component {
         Authorization: `Bearer ${token}`
       }
     })
-      .then(res => console.log(res))
+      .then(res => this.setState({ user: res.data.data }))
       .catch(err => console.log({ err }));
   };
 
   render() {
-    const { tokenSuccess } = this.state;
+    const { tokenSuccess, user } = this.state;
+
+    console.log(user);
 
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
     }
     return (
-      <div>
-        <h1>MP</h1>
+      <div className="profileLanding">
+        <div className="profileLandingContainer">
+          <h1>Edit Profile</h1>
+          <div className="formContainer">
+            <Form />
+          </div>
+        </div>
       </div>
     );
   }

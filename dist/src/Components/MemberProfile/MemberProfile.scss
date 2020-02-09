@@ -1,0 +1,90 @@
+.profileLanding {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#d3f7ff, #05c4ef);
+  // background: #d3f7ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+
+  .profileLandingContainer {
+    width: 500px;
+    height: 100%;
+    h1 {
+      font-weight: 400;
+    }
+  }
+
+  .formContainer {
+    width: 100%;
+    background: #fff;
+    height: 80vh;
+
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+
+      .input {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 10px auto;
+
+        label {
+          margin-bottom: 15px;
+        }
+
+        input {
+          background: #333;
+          outline: none;
+          border: none;
+          padding: 10px;
+          transition: 1s ease;
+
+          &:focus {
+            background: #67f0ac;
+          }
+        }
+      }
+      .role {
+        h5 {
+          font-weight: 300;
+        }
+        .options {
+          display: flex;
+
+          h6 {
+            border: 1px solid #67f0ac;
+            width: 100px;
+            text-align: center;
+            margin: 10px 20px;
+            margin-left: 0;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: 0.4s ease;
+
+            &:hover {
+              background: #67f0ac;
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      .submitEdit {
+        h5 {
+          background: #67f0ac;
+          padding: 10px 50px;
+          border-radius: 5px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

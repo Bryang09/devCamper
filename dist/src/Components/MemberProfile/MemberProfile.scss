@@ -53,6 +53,16 @@
             background: #67f0ac;
           }
         }
+        input[type="file" i] {
+          color: #fff;
+          background: #67f0ac;
+        }
+      }
+
+      .imgUpload {
+        label {
+          color: #fff;
+        }
       }
       .role {
         h5 {
@@ -93,10 +103,19 @@
           font-weight: 400;
           cursor: pointer;
           text-align: center;
+
+          transition: 0.4s ease;
+          &:hover {
+            background: #39b4ff;
+          }
         }
         .skip {
           background: #464646;
           color: #fff;
+          transition: 0.4s ease;
+          &:hover {
+            background: #2f2f2f;
+          }
         }
       }
     }

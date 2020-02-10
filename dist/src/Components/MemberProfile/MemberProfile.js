@@ -67,6 +67,7 @@ export class MemberProfile extends Component {
   // Handle User Input
 
   onHandleInput = e => {
+    e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -95,7 +96,14 @@ export class MemberProfile extends Component {
         Authorization: `Bearer ${token}`
       }
     })
-      .then(res => this.setState({ formType: "none", user: res.data.data }))
+      .then(res =>
+        this.setState({
+          formType: "none",
+          user: res.data.data,
+          errMessage: null,
+          statusCode: null
+        })
+      )
       .catch(err => {
         const errorResponse = { err };
         const statusCode = errorResponse.err.response.status;
@@ -123,7 +131,12 @@ export class MemberProfile extends Component {
         "Content-Type": "application/json"
       }
     })
-      .then(res => this.setState({ formType: "none" }, console.log(res)))
+      .then(res =>
+        this.setState(
+          { formType: "none", errMessage: null, statusCode: null },
+          console.log(res)
+        )
+      )
       .catch(err => {
         const errorResponse = { err };
         // const { errorResponse } = errorRespone.err;
@@ -135,6 +148,7 @@ export class MemberProfile extends Component {
   };
 
   onPhotoChange = e => {
+    e.preventDefault();
     const newPhoto = e.target.files[0];
 
     this.setState({ photo: newPhoto });
@@ -159,7 +173,12 @@ export class MemberProfile extends Component {
       .then(res => {
         const { photo } = this.state.user;
         this.setState(
-          { formType: "none", photo: res.data.data },
+          {
+            formType: "none",
+            photo: res.data.data,
+            errMessage: null,
+            statusCode: null
+          },
           this.onGetUser,
           console.log(res)
         );
@@ -238,7 +257,9 @@ export class MemberProfile extends Component {
           name,
           email,
           photo,
-          role
+          role,
+          errMessage: null,
+          statusCode: null
         });
       })
       .catch(err => {

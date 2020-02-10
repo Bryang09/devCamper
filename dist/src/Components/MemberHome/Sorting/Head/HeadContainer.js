@@ -10,6 +10,7 @@ const HeadContainer = props => {
     <div className="headContainer">
       <Link to="/member/profile">
         <div
+          key={photo}
           className="imgContainer"
           style={{
             backgroundImage: `url(${BASE_URL}/users/uploads/${photo})`

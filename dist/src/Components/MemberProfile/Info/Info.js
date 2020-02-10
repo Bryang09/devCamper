@@ -2,10 +2,11 @@ import React from "react";
 import HeadContainer from "../../MemberHome/Sorting/Head/HeadContainer";
 
 import "./Info.scss";
+// FIND OUT WHY PHOTO IS NOT UPDATING WHEN CHANGED
 
 const Info = props => {
   const { user, goBack } = props;
-  const { name, photo, email, role } = user;
+  const { name, email, role, photo } = user;
 
   return (
     <div className="sortContainer infoContainer">

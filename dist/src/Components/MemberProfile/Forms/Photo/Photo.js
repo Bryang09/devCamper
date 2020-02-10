@@ -3,7 +3,7 @@ import React from "react";
 const Photo = props => {
   const { onSkip, onPhotoChange, onSubmitPhotoChange } = props;
   return (
-    <>
+    <form>
       <div className="input imgUpload">
         <label htmlFor="photo">Upload Photo</label>
         <input type="file" name="photo" onChange={onPhotoChange} />
@@ -14,7 +14,7 @@ const Photo = props => {
           Skip
         </h5>
       </div>
-    </>
+    </form>
   );
 };
 

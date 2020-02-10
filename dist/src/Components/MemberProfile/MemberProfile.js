@@ -45,7 +45,13 @@ export class MemberProfile extends Component {
     })
       .then(res => {
         const { name, email, photo, role } = res.data.data;
-        this.setState({ user: res.data.data, name, email, photo, role });
+        this.setState({
+          user: res.data.data,
+          name,
+          email,
+          photo,
+          role
+        });
       })
       .catch(err => {
         console.log(err);
@@ -136,7 +142,7 @@ export class MemberProfile extends Component {
 
   // Change User Photo
   onSubmitPhotoChange = () => {
-    const { user, photo } = this.state;
+    const { user } = this.state;
     const token = localStorage.getItem("token");
 
     let formData = new FormData();
@@ -150,7 +156,14 @@ export class MemberProfile extends Component {
           "Content-Type": "multipart/form-data"
         }
       })
-      .then(res => this.setState({ formType: "none" }))
+      .then(res => {
+        const { photo } = this.state.user;
+        this.setState(
+          { formType: "none", photo: res.data.data },
+          this.onGetUser,
+          console.log(res)
+        );
+      })
       .catch(err => {
         const errorResponse = { err };
         // const { errorResponse } = errorRespone.err;
@@ -207,6 +220,32 @@ export class MemberProfile extends Component {
     this.setState({ formType: "none" });
   };
 
+  onGetUser = () => {
+    const token = localStorage.getItem("token");
+
+    // ------------------------------------------------
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/auth/me`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        const { name, email, photo, role } = res.data.data;
+        this.setState({
+          user: res.data.data,
+          name,
+          email,
+          photo,
+          role
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const {
       tokenSuccess,
@@ -220,7 +259,7 @@ export class MemberProfile extends Component {
       goBack
     } = this.state;
 
-    console.log(this.state);
+    console.log(this.state.photo);
 
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
@@ -233,7 +272,7 @@ export class MemberProfile extends Component {
         <Error errMessage={errMessage} statusCode={statusCode} />
 
         <div className="profileInfo">
-          <Info user={user} goBack={this.onGoBack} />
+          <Info user={user} goBack={this.onGoBack} photo={photo} />
         </div>
         <div className="profileLandingContainer">
           <h1>Edit Profile</h1>

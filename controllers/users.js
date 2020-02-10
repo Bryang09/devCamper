@@ -2,6 +2,7 @@ const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const path = require("path");
+const crypto = require("crypto");
 
 // @desc    Get All Users
 // @route   GET /api/v1/users
@@ -94,8 +95,10 @@ exports.userPhotoUpload = asyncHandler(async (req, res, next) => {
     );
   }
 
+  let id = crypto.randomBytes(5).toString("hex");
+
   // CREATE CUSTOM FILENAME
-  file.name = `photo_${user._id}${path.parse(file.name).ext}`;
+  file.name = `photo_${id}${user._id}${path.parse(file.name).ext}`;
 
   file.mv(`${process.env.USER_FILE_UPLOAD_PATH}/${file.name}`, async err => {
     if (err) {

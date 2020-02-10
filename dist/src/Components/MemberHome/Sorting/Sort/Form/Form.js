@@ -13,8 +13,6 @@ const Form = props => {
     onDistanceAndPrice
   } = props;
 
-  console.log(zip, distance, maxPrice);
-
   return (
     <form id="sort" onChange={onSort}>
       <div className="input">

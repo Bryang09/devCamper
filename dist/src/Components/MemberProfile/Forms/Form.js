@@ -3,6 +3,7 @@ import React from "react";
 import NoForm from "./NoForm/NoForm";
 import Email from "./Email/Email";
 import Password from "./Password/Password";
+import Photo from "./Photo/Photo";
 
 const Form = props => {
   const {
@@ -13,7 +14,9 @@ const Form = props => {
     formType,
     onFormType,
     onEmail,
-    onSkip
+    onSkip,
+    onPhotoChange,
+    onSubmitPhotoChange
   } = props;
 
   if (formType === "none") {
@@ -28,6 +31,14 @@ const Form = props => {
         onHandleInput={onHandleInput}
         onUpdatePassword={onUpdatePassword}
         onSkip={onSkip}
+      />
+    );
+  } else if (formType === "photo") {
+    return (
+      <Photo
+        onPhotoChange={onPhotoChange}
+        onSkip={onSkip}
+        onSubmitPhotoChange={onSubmitPhotoChange}
       />
     );
   }

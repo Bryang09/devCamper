@@ -14,7 +14,7 @@ const NoForm = props => {
       </div>
 
       <div className="formType picture">
-        <h4>Change Picture</h4>
+        <h4 onClick={() => onFormType("photo")}>Change Picture</h4>
       </div>
     </div>
   );

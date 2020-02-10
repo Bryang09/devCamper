@@ -7,7 +7,6 @@ import HeadContainer from "./Head/HeadContainer";
 import Sort from "./Sort/Sort";
 
 const Sorting = props => {
-  console.log(props);
   const {
     photo,
     name,

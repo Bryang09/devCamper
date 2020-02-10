@@ -158,8 +158,6 @@ class Landing extends Component {
       return <Redirect to={"/member/home"} />;
     }
 
-    console.log(formType);
-
     return (
       <div className="Landing">
         <Error errMessage={errMessage} statusCode={statusCode} />

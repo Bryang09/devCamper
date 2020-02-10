@@ -16,18 +16,18 @@ const advancedResults = require("../middleware/advancedResults");
 const { protect, authorize } = require("../middleware/auth");
 
 router.use(protect);
-router.use(authorize("admin"));
+// router.use(authorize("admin"));
 
 router
   .route("/")
   .get(advancedResults(User), getUsers)
-  .post(createUser);
+  .post(authorize("admin"), createUser);
 
 router
   .route("/:id")
   .get(getUser)
-  .put(updateUser)
-  .delete(deleteUser);
+  .put(authorize("admin"), updateUser)
+  .delete(authorize("admin"), deleteUser);
 
 router.route("/:id/photo").put(protect, userPhotoUpload);
 

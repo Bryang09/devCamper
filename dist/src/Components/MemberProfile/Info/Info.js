@@ -6,7 +6,6 @@ import "./Info.scss";
 const Info = props => {
   const { user, goBack } = props;
   const { name, photo, email, role } = user;
-  console.log(name, photo);
 
   return (
     <div className="sortContainer infoContainer">

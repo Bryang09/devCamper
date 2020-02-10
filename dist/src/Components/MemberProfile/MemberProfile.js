@@ -128,21 +128,29 @@ export class MemberProfile extends Component {
       });
   };
 
-  onPhotoChange = () => {
+  onPhotoChange = e => {
+    const newPhoto = e.target.files[0];
+
+    this.setState({ photo: newPhoto });
+  };
+
+  // Change User Photo
+  onSubmitPhotoChange = () => {
     const { user, photo } = this.state;
     const token = localStorage.getItem("token");
 
-    axios({
-      method: "put",
-      url: `${BASE_URL}/api/v1/users/${user._id}/photo`,
-      data: {
-        file: photo
-      },
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(res => console.log("password success"))
+    let formData = new FormData();
+
+    formData.append("file", this.state.photo);
+
+    axios
+      .put(`${BASE_URL}/api/v1/users/${user._id}/photo`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data"
+        }
+      })
+      .then(res => this.setState({ formType: "none" }))
       .catch(err => {
         const errorResponse = { err };
         // const { errorResponse } = errorRespone.err;
@@ -241,6 +249,8 @@ export class MemberProfile extends Component {
               onEmail={this.onEmail}
               onUpdatePassword={this.onUpdatePassword}
               onSkip={this.onSkip}
+              onPhotoChange={this.onPhotoChange}
+              onSubmitPhotoChange={this.onSubmitPhotoChange}
             />
           </div>
         </div>

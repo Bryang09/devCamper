@@ -42,53 +42,6 @@ const Form = props => {
       />
     );
   }
-  return {
-    /* <>
-       <form onChange={onHandleInput}>
-        <div className="input">
-          <label htmlFor="name">Change Name</label>
-          <input type="text" name="name" placeholder="New Name" />
-        </div>
-        <div className="input">
-          <label htmlFor="email">Change Email</label>
-          <input type="text" name="email" placeholder="New Email" />
-        </div>
-        <div className="input">
-          <label htmlFor="password">Change Password</label>
-          <input
-            type="text"
-            name="password"
-            placeholder="New Password"
-            onChange={onPasswordChangeInput}
-          />
-        </div>
-        <div className="input role">
-          <h5>Change Role</h5>
-          <div className="options">
-            <h6
-              onClick={() => onRoleChange("user")}
-              className={role === "user" ? "roleSelected" : ""}
-            >
-              User
-            </h6>
-            <h6
-              onClick={() => onRoleChange("publisher")}
-              className={role === "publisher" ? "roleSelected" : ""}
-            >
-              Publisher
-            </h6>
-          </div>
-        </div>
-        <div className="input imgUpload">
-          <label htmlFor="photo"></label>
-          <input type="file" name="photo" />
-        </div>
-        <div className="submitEdit">
-          <h5 onClick={onSubmitChanges}>Submit</h5>
-        </div>
-      </form>
-    </> */
-  };
 };
 
 export default Form;

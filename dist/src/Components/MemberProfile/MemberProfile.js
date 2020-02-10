@@ -71,6 +71,46 @@ export class MemberProfile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // Return to /member/home
+  onGoBack = () => {
+    this.setState({ goBack: true });
+  };
+
+  // Skip Form
+  onSkip = () => {
+    this.setState({ formType: "none" });
+  };
+
+  // Get user information
+
+  onGetUser = () => {
+    const token = localStorage.getItem("token");
+
+    // ------------------------------------------------
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/auth/me`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => {
+        const { name, email, photo, role } = res.data.data;
+        this.setState({
+          user: res.data.data,
+          name,
+          email,
+          photo,
+          role,
+          errMessage: null,
+          statusCode: null
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   // Change Name Or Email
   onEmail = () => {
     const { user, name, email } = this.state;
@@ -193,80 +233,6 @@ export class MemberProfile extends Component {
       });
   };
 
-  onSubmitChanges = () => {
-    const { user, name, email, role, password, photo } = this.state;
-    const token = localStorage.getItem("token");
-
-    const checkName = user.name !== name;
-    const checkEmail = user.email !== email;
-    const checkRole = user.role !== role;
-    const checkPhoto = user.photo !== photo;
-    const checkPassword = password !== null;
-
-    let newName = checkName ? name : user.name;
-    let newEmail = checkEmail ? email : user.email;
-    let newRole = checkRole ? role : user.role;
-    let newPhoto = checkPhoto ? photo : user.photo;
-    let newPassword = checkPassword ? password : null;
-
-    axios({
-      method: "put",
-      url: `${BASE_URL}/api/v1/auth/updatedetails`,
-      data: {
-        name: newName,
-        email: newEmail
-      },
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(res => console.log("success"))
-      .catch(err => {
-        const errorResponse = { err };
-        // const { errorResponse } = errorRespone.err;
-        const statusCode = errorResponse.err.response.status;
-        const { error } = errorResponse.err.response.data;
-
-        this.setState({ statusCode, errMessage: error });
-      });
-  };
-
-  onGoBack = () => {
-    this.setState({ goBack: true });
-  };
-
-  onSkip = () => {
-    this.setState({ formType: "none" });
-  };
-
-  onGetUser = () => {
-    const token = localStorage.getItem("token");
-
-    // ------------------------------------------------
-    axios({
-      method: "get",
-      url: `${BASE_URL}/api/v1/auth/me`,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(res => {
-        const { name, email, photo, role } = res.data.data;
-        this.setState({
-          user: res.data.data,
-          name,
-          email,
-          photo,
-          role,
-          errMessage: null,
-          statusCode: null
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   render() {
     const {
       tokenSuccess,
@@ -280,11 +246,12 @@ export class MemberProfile extends Component {
       goBack
     } = this.state;
 
-    console.log(this.state.photo);
-
+    // There is no access token
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
-    } else if (goBack === true) {
+    }
+    // Return to /member/home
+    else if (goBack === true) {
       return <Redirect to="/member/home" />;
     }
 
@@ -296,7 +263,6 @@ export class MemberProfile extends Component {
           <Info user={user} goBack={this.onGoBack} photo={photo} />
         </div>
         <div className="profileLandingContainer">
-          <h1>Edit Profile</h1>
           <div className="formContainer">
             <Form
               name={name}

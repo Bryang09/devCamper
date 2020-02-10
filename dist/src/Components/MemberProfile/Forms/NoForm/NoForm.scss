@@ -1,0 +1,27 @@
+.noForm {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .formType {
+    width: 80%;
+
+    h4 {
+      font-weight: 400;
+      text-align: center;
+      border: 1px solid #67f0ac;
+      padding: 20px;
+      transition: 0.4s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: #67f0ac;
+        color: #fff;
+      }
+      //   border-radius: 30px;
+    }
+  }
+}

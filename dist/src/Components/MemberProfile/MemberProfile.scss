@@ -1,17 +1,19 @@
 .profileLanding {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(#d3f7ff, #05c4ef);
+  // background: linear-gradient(#d3f7ff, #05c4ef);
   // background: #d3f7ff;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  // flex-direction: column;
   font-family: "Montserrat", sans-serif;
 
   .profileLandingContainer {
-    width: 500px;
+    width: 70vw;
     height: 100%;
+    background: rgb(31, 31, 31);
+
     h1 {
       font-weight: 400;
     }
@@ -19,8 +21,9 @@
 
   .formContainer {
     width: 100%;
-    background: #fff;
+
     height: 80vh;
+    transition: 1s ease;
 
     form {
       display: flex;
@@ -58,6 +61,11 @@
         .options {
           display: flex;
 
+          .roleSelected {
+            background: #67f0ac;
+            color: #fff;
+          }
+
           h6 {
             border: 1px solid #67f0ac;
             width: 100px;
@@ -77,12 +85,18 @@
         }
       }
 
-      .submitEdit {
+      .submit {
         h5 {
           background: #67f0ac;
           padding: 10px 50px;
           border-radius: 5px;
           font-weight: 400;
+          cursor: pointer;
+          text-align: center;
+        }
+        .skip {
+          background: #464646;
+          color: #fff;
         }
       }
     }

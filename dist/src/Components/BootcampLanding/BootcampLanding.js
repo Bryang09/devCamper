@@ -62,7 +62,16 @@ export class BootcampLanding extends Component {
     console.log(this.state);
 
     if (bootcamp !== null) {
-      const { name, photo, location, website, phone, email } = bootcamp;
+      const {
+        name,
+        photo,
+        location,
+        website,
+        phone,
+        email,
+        description,
+        careers
+      } = bootcamp;
 
       return (
         <div className="BootcampLanding">
@@ -74,6 +83,8 @@ export class BootcampLanding extends Component {
               website={website}
               phone={phone}
               email={email}
+              description={description}
+              careers={careers}
             />
           </div>
           <div className="commentSection">

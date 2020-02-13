@@ -1,10 +1,13 @@
 @import "../../../Uitilites/variables.scss";
 
+@function shadow($color1) {
+  @return 0px 6px 40px $color1;
+}
+
 .bootcampPersonalInfo {
   width: 30vw;
   height: 80vh;
   background: #fff;
-  margin-left: 50px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -41,10 +44,88 @@
 
     #location {
       width: 80%;
+
+      a {
+        color: $dark;
+      }
     }
   }
 }
 
-.bootcampInfo {
+.aboutSection {
   width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .sectionContainer {
+    width: 90%;
+    border: 1px solid red;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .section {
+      width: 90%;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 30%;
+      margin: 1.5% 0;
+      color: #fff;
+      background: red;
+
+      h3 {
+        margin-bottom: 0;
+      }
+
+      h5 {
+        width: 80%;
+        font-weight: 400;
+        text-align: center;
+      }
+    }
+
+    .about {
+      background: linear-gradient(#bc79ff, #8356fc);
+      box-shadow: shadow(#8356fc);
+    }
+    .courses {
+      background: linear-gradient(#ff2bbe, #e95fff);
+      box-shadow: shadow(#e95fff);
+
+      h3 {
+        margin-bottom: 20px;
+      }
+      .coursesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+
+          li {
+            width: 50%;
+          }
+        }
+
+        h5 {
+          width: 50%;
+          margin: 5px 0;
+          text-align: left;
+        }
+      }
+    }
+  }
 }

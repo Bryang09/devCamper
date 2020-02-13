@@ -4,6 +4,8 @@ import "./Results.scss";
 
 import { BASE_URL } from "../../../keys.js";
 
+import { Link } from "react-router-dom";
+
 const Results = props => {
   const { bootcamps } = props;
 
@@ -25,12 +27,14 @@ const Results = props => {
       <div className="singleBootcamp" key={_id}>
         <div className="singleBootcampContainer">
           <div className="bootcampImageContainer">
-            <div
-              className="bootcampImage"
-              style={{
-                backgroundImage: `url(${BASE_URL}/uploads/${photo})`
-              }}
-            ></div>
+            <Link to={`/bootcamp/user/${_id}`}>
+              <div
+                className="bootcampImage"
+                style={{
+                  backgroundImage: `url(${BASE_URL}/uploads/${photo})`
+                }}
+              ></div>
+            </Link>
           </div>
 
           <div className="bootcampInfo">

@@ -108,7 +108,6 @@ export class MemberHome extends Component {
   };
 
   onLogout = () => {
-    const { logoutSuccess } = this.state;
     axios({
       method: "get",
       url: `${BASE_URL}/api/v1/auth/logout`
@@ -146,7 +145,6 @@ export class MemberHome extends Component {
             zip={zip}
             distance={distance}
             onSort={this.onSort}
-            onSubmitDistance={this.onSubmitDistance}
             onSubmitDistance={this.onSubmitDistance}
             onSubmitPrice={this.onSubmitPrice}
             onDistanceAndPrice={this.onDistanceAndPrice}

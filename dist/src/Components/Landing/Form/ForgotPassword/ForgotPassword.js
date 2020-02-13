@@ -1,7 +1,6 @@
 import React from "react";
 
 import Email from "../Email/Email";
-import Password from "../Password/Password";
 
 const ForgotPassword = props => {
   const { email, onChange, onForgotPassword, onFormType } = props;

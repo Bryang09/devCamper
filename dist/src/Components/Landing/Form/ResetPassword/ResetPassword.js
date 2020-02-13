@@ -1,8 +1,6 @@
 import React from "react";
 
-import Email from "../Email/Email";
 import Password from "../Password/Password";
-import Name from "../Name/Name";
 import Token from "../Token/Token";
 
 const ResetPassword = props => {

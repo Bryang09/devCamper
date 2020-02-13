@@ -211,7 +211,6 @@ export class MemberProfile extends Component {
         }
       })
       .then(res => {
-        const { photo } = this.state.user;
         this.setState(
           {
             formType: "none",

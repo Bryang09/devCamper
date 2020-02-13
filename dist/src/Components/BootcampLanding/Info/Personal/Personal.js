@@ -20,7 +20,15 @@ const Personal = props => {
       <div className="infoContainer">
         <div className="info">
           <h3>{name}</h3>
-          <h4 id="location">{location.formattedAddress}</h4>
+          <h4 id="location">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${location.coordinates[1]},${location.coordinates[0]}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {location.formattedAddress}
+            </a>
+          </h4>
           <h4>{website}</h4>
           <h4>{phone}</h4>
           <h5>{email}</h5>

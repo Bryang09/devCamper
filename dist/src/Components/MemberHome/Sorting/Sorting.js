@@ -1,7 +1,5 @@
 import React from "react";
 
-import { BASE_URL } from "../../../keys";
-
 import "./Sorting.scss";
 import HeadContainer from "./Head/HeadContainer";
 import Sort from "./Sort/Sort";
@@ -17,7 +15,7 @@ const Sorting = props => {
     maxPrice,
     onSubmitPrice,
     onDistanceAndPrice,
-    onLogout = { onLogout }
+    onLogout
   } = props;
 
   return (

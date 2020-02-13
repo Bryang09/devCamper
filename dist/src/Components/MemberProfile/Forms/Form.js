@@ -8,8 +8,6 @@ import Photo from "./Photo/Photo";
 const Form = props => {
   const {
     onHandleInput,
-    onSubmitChanges,
-    onRoleChange,
     onUpdatePassword,
     formType,
     onFormType,

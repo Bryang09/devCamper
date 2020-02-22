@@ -1,0 +1,57 @@
+.review {
+  display: flex;
+  margin: 30px auto;
+  align-items: center;
+  border: 1px solid #ff4343;
+  border-radius: 5px;
+  width: 90%;
+
+  .userInfo {
+    width: 30%;
+    height: 80%;
+    // background: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #dadada;
+    margin-right: 10px;
+
+    .userPicture {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #333;
+    }
+  }
+
+  .reviewContent {
+    width: 70%;
+    height: 80%;
+    // background: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #7c7c7c;
+
+      h4 {
+        margin-bottom: 0;
+        text-transform: capitalize;
+      }
+      h5 {
+        font-weight: 400;
+      }
+      h6 {
+        margin-top: 0;
+        font-weight: 400;
+      }
+    }
+  }
+}

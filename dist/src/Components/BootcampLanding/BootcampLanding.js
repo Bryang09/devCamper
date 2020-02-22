@@ -7,12 +7,14 @@ import { BASE_URL } from "../../keys";
 
 import "./BootcampLanding.scss";
 import Info from "./Info/Info";
+import Reviews from "./Reviews/Reviews";
 
 export class BootcampLanding extends Component {
   state = {
     tokenSuccess: null,
     user: null,
-    bootcamp: null
+    bootcamp: null,
+    reviews: null
   };
 
   componentDidMount = () => {
@@ -51,17 +53,32 @@ export class BootcampLanding extends Component {
       method: "get",
       url: `${BASE_URL}/api/v1/bootcamps/${bootcampId}`
     })
-      .then(res => this.setState({ bootcamp: res.data.data }, console.log(res)))
+      .then(res =>
+        this.setState({ bootcamp: res.data.data }, this.onGetBootcampReviews)
+      )
       .catch(err => console.log(err));
   };
+
+  onGetBootcampReviews = () => {
+    const { bootcamp } = this.state;
+    const { _id } = bootcamp;
+
+    axios({
+      method: "get",
+      url: `${BASE_URL}/api/v1/bootcamps/${_id}/reviews`
+    })
+      .then(res => this.setState({ reviews: res.data.data }))
+      .catch(err => console.log(err));
+  };
+
   render() {
-    const { tokenSuccess, bootcamp } = this.state;
+    const { tokenSuccess, bootcamp, reviews } = this.state;
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
     }
     console.log(this.state);
 
-    if (bootcamp !== null) {
+    if (bootcamp !== null && reviews !== null) {
       const {
         name,
         photo,
@@ -70,7 +87,11 @@ export class BootcampLanding extends Component {
         phone,
         email,
         description,
-        careers
+        careers,
+        housing,
+        jobAssistance,
+        jobGuarantee,
+        acceptGi
       } = bootcamp;
 
       return (
@@ -85,10 +106,14 @@ export class BootcampLanding extends Component {
               email={email}
               description={description}
               careers={careers}
+              housing={housing}
+              jobAssistance={jobAssistance}
+              jobGuarantee={jobGuarantee}
+              acceptGi={acceptGi}
             />
           </div>
-          <div className="commentSection">
-            <h1>comments</h1>
+          <div className="reviewSection">
+            <Reviews reviews={reviews} />
           </div>
         </div>
       );

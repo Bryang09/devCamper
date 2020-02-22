@@ -12,7 +12,11 @@ const Info = props => {
     phone,
     email,
     description,
-    careers
+    careers,
+    housing,
+    jobAssistance,
+    jobGuarantee,
+    acceptGi
   } = props;
   return (
     <>
@@ -24,7 +28,14 @@ const Info = props => {
         phone={phone}
         email={email}
       />
-      <About description={description} careers={careers} />
+      <About
+        description={description}
+        careers={careers}
+        housing={housing}
+        jobAssistance={jobAssistance}
+        jobGuarantee={jobGuarantee}
+        acceptGi={acceptGi}
+      />
     </>
   );
 };

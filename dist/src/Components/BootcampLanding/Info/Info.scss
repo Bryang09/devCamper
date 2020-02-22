@@ -61,7 +61,6 @@
 
   .sectionContainer {
     width: 90%;
-    border: 1px solid red;
     height: 80vh;
     display: flex;
     flex-direction: column;
@@ -76,8 +75,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 30%;
-      margin: 1.5% 0;
+      height: 25%;
+      margin: 2.5% 0;
       color: #fff;
       background: red;
 
@@ -90,20 +89,8 @@
         font-weight: 400;
         text-align: center;
       }
-    }
 
-    .about {
-      background: linear-gradient(#bc79ff, #8356fc);
-      box-shadow: shadow(#8356fc);
-    }
-    .courses {
-      background: linear-gradient(#ff2bbe, #e95fff);
-      box-shadow: shadow(#e95fff);
-
-      h3 {
-        margin-bottom: 20px;
-      }
-      .coursesContainer {
+      .sectionListContainer {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -126,6 +113,23 @@
           text-align: left;
         }
       }
+    }
+
+    .about {
+      background: linear-gradient(#bc79ff, #8356fc);
+      box-shadow: shadow(#8356fc);
+    }
+    .courses {
+      background: linear-gradient(#ff2bbe, #e95fff);
+      box-shadow: shadow(#e95fff);
+
+      h3 {
+        margin-bottom: 20px;
+      }
+    }
+    .other {
+      background: linear-gradient(#fd8963, #fd3736);
+      box-shadow: shadow(#fd3736);
     }
   }
 }

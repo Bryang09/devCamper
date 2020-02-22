@@ -8,6 +8,7 @@ import { BASE_URL } from "../../keys";
 import "./BootcampLanding.scss";
 import Info from "./Info/Info";
 import Reviews from "./Reviews/Reviews";
+import AddReview from "./AddReview/AddReview";
 
 export class BootcampLanding extends Component {
   state = {
@@ -15,7 +16,8 @@ export class BootcampLanding extends Component {
     user: null,
     bootcamp: null,
     reviews: null,
-    reviewUsers: []
+    reviewUsers: [],
+    addReview: false
   };
 
   componentDidMount = () => {
@@ -99,6 +101,7 @@ export class BootcampLanding extends Component {
           this.setState({
             reviewUsers: this.state.reviewUsers.concat(newUsers)
           });
+          return;
         })
         .catch(err => console.log(err));
     });
@@ -106,8 +109,18 @@ export class BootcampLanding extends Component {
     return getReviewUser;
   };
 
+  onReview = () => {
+    this.setState({ addReview: !this.state.addReview });
+  };
+
   render() {
-    const { tokenSuccess, bootcamp, reviews, reviewUsers } = this.state;
+    const {
+      tokenSuccess,
+      bootcamp,
+      reviews,
+      reviewUsers,
+      addReview
+    } = this.state;
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
     }
@@ -131,6 +144,7 @@ export class BootcampLanding extends Component {
 
       return (
         <div className="BootcampLanding">
+          <AddReview addReview={addReview} onReview={this.onReview} />
           <div className="infoSection">
             <Info
               name={name}
@@ -149,6 +163,9 @@ export class BootcampLanding extends Component {
           </div>
           <div className="reviewSection">
             <h2 style={{ textAlign: "center", fontWeight: 400 }}>Reviews</h2>
+            <h5 id="addReview" onClick={this.onReview}>
+              Add Review
+            </h5>
             <Reviews reviews={reviews} reviewUsers={reviewUsers} />
           </div>
         </div>

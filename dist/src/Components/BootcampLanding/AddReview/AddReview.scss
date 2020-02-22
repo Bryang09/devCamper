@@ -1,0 +1,127 @@
+$mainFormColor: #ffc37e;
+$inputBg: #ffe3c3;
+$secondaryColor: #a98bff;
+
+.addReview {
+  width: 100vw;
+  min-height: 100vh;
+  max-height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: appear 0.8s ease;
+
+  .reviewSection {
+    width: 650px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: $mainFormColor;
+    border-radius: 5px;
+    box-shadow: 0px 17px 40px $mainFormColor;
+
+    .reviewForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+
+      form {
+        width: 100%;
+      }
+
+      .input {
+        margin: 20px 0;
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 20px 0;
+          outline: none;
+          border: 0;
+          border-radius: 5px;
+          background: $inputBg;
+          padding-left: 10px;
+          resize: none;
+        }
+      }
+
+      .rating {
+        width: 100%;
+
+        h5 {
+          text-align: center;
+          font-weight: 400;
+        }
+        .ratings {
+          display: flex;
+          flex-wrap: wrap;
+
+          h6 {
+            width: 18%;
+            text-align: center;
+            background: $inputBg;
+            margin: 1%;
+            padding: 5px 0;
+            font-weight: 400;
+            transition: 0.4s ease;
+            cursor: pointer;
+            &:hover {
+              background: $secondaryColor;
+            }
+          }
+          .active {
+            background: $secondaryColor;
+          }
+        }
+      }
+    }
+
+    .submit {
+      width: 60%;
+      text-align: center;
+      padding: 10px 0;
+      background: #333;
+      border: 1px solid #333;
+
+      cursor: not-allowed;
+      transition: 0.4s ease;
+    }
+
+    .submitActive {
+      border: 1px solid $secondaryColor;
+      border-radius: 50px;
+      background: $secondaryColor;
+      transition: 0.4s ease;
+      cursor: pointer;
+    }
+
+    #close {
+      font-weight: 400;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+#addReview {
+  text-align: center;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

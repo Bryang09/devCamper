@@ -21,7 +21,14 @@
       width: 70px;
       height: 70px;
       border-radius: 50%;
-      background: #333;
+      background: #333 no-repeat center center / cover;
+    }
+
+    .userName {
+      h4 {
+        font-weight: 400;
+        color: #7c7c7c;
+      }
     }
   }
 
@@ -47,6 +54,10 @@
       }
       h5 {
         font-weight: 400;
+
+        span {
+          margin-left: 5px;
+        }
       }
       h6 {
         margin-top: 0;

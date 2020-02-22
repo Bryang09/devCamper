@@ -14,7 +14,8 @@ export class BootcampLanding extends Component {
     tokenSuccess: null,
     user: null,
     bootcamp: null,
-    reviews: null
+    reviews: null,
+    reviewUsers: []
   };
 
   componentDidMount = () => {
@@ -67,12 +68,46 @@ export class BootcampLanding extends Component {
       method: "get",
       url: `${BASE_URL}/api/v1/bootcamps/${_id}/reviews`
     })
-      .then(res => this.setState({ reviews: res.data.data }))
+      .then(res =>
+        this.setState(
+          { reviews: res.data.data },
+          this.onGetBootcampReviewsUsers
+        )
+      )
       .catch(err => console.log(err));
   };
 
+  // Get Information of the user that made comment
+  onGetBootcampReviewsUsers = () => {
+    const token = localStorage.getItem("token");
+
+    const { reviews } = this.state;
+
+    const getReviewUser = reviews.map(res => {
+      const { user } = res;
+
+      axios({
+        method: "get",
+        url: `${BASE_URL}/api/v1/users/${user}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(res => {
+          let newUsers = res.data.data;
+
+          this.setState({
+            reviewUsers: this.state.reviewUsers.concat(newUsers)
+          });
+        })
+        .catch(err => console.log(err));
+    });
+
+    return getReviewUser;
+  };
+
   render() {
-    const { tokenSuccess, bootcamp, reviews } = this.state;
+    const { tokenSuccess, bootcamp, reviews, reviewUsers } = this.state;
     if (tokenSuccess === false) {
       return <Redirect to="/" />;
     }
@@ -113,7 +148,8 @@ export class BootcampLanding extends Component {
             />
           </div>
           <div className="reviewSection">
-            <Reviews reviews={reviews} />
+            <h2 style={{ textAlign: "center", fontWeight: 400 }}>Reviews</h2>
+            <Reviews reviews={reviews} reviewUsers={reviewUsers} />
           </div>
         </div>
       );
